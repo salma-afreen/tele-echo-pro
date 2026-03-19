@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Study</title>
+</head>
+
+<body>
+
+<h2>Create Study</h2>
+
+<input placeholder="Patient Name" id="name"><br><br>
+<input placeholder="Age" id="age"><br><br>
+
+<button onclick="createStudy()">Create Study</button>
+
+<p id="msg"></p>
+
+<script>
+function createStudy() {
+  let name = document.getElementById("name").value;
+  let age = document.getElementById("age").value;
+
+  if(name === "" || age === "") {
+    document.getElementById("msg").innerText = "Fill all details!";
+    return;
+  }
+
+  let studyID = "STUDY-" + Math.floor(Math.random() * 10000);
+
+  localStorage.setItem("studyID", studyID);
+
+  document.getElementById("msg").innerText = "Study Created: " + studyID;
+
+  setTimeout(() => {
+    window.location.href = "upload.html";
+  }, 1000);
+}
+</script>
+
+</body>
+</html>
