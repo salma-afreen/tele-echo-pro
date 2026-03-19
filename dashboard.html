@@ -2,20 +2,83 @@
 <html>
 <head>
   <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h2>Dashboard</h2>
+<div class="dashboard">
 
-<button onclick="newStudy()">New Study</button>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>Tele Echo Pro</h2>
+    <a href="#">Dashboard</a>
+    <a href="#">Patients</a>
+    <a href="#">Studies</a>
+    <a href="#">Reports</a>
+    <a href="#">Settings</a>
+  </div>
 
-<h3 id="roleText"></h3>
+  <!-- MAIN -->
+  <div class="main">
+
+    <div class="topbar">
+      <h2>Dashboard Overview</h2>
+      <button onclick="newStudy()">+ New Study</button>
+    </div>
+
+    <!-- CARDS -->
+    <div class="cards">
+      <div class="card-box">
+        <h3>1240</h3>
+        <p>Total Studies</p>
+      </div>
+
+      <div class="card-box">
+        <h3>14</h3>
+        <p>Pending Reviews</p>
+      </div>
+
+      <div class="card-box">
+        <h3>3</h3>
+        <p>Abnormal Findings</p>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table">
+      <h3>Recent Studies</h3>
+
+      <table>
+        <tr>
+          <th>Patient</th>
+          <th>Study ID</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+
+        <tr>
+          <td>Jane Cooper</td>
+          <td>#ECH-3921</td>
+          <td>Oct 24</td>
+          <td>Pending</td>
+        </tr>
+
+        <tr>
+          <td>Cameron</td>
+          <td>#ECH-4512</td>
+          <td>Oct 24</td>
+          <td>In Review</td>
+        </tr>
+
+      </table>
+    </div>
+
+  </div>
+
+</div>
 
 <script>
-let role = localStorage.getItem("role");
-document.getElementById("roleText").innerText = "Logged in as: " + role;
-
 function newStudy() {
   window.location.href = "study.html";
 }
