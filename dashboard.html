@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+
+<body>
+
+<h2>Dashboard</h2>
+
+<button onclick="newStudy()">New Study</button>
+
+<h3 id="roleText"></h3>
+
+<script>
+let role = localStorage.getItem("role");
+document.getElementById("roleText").innerText = "Logged in as: " + role;
+
+function newStudy() {
+  window.location.href = "study.html";
+}
+</script>
+
+</body>
+</html>
