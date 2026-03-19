@@ -1,40 +1,176 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Report</title>
+  <title>Echo Report</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px;
+      background: #2b7cff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .output {
+      background: #f9fafb;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 
 <body>
 
-<h2>Echo Report</h2>
+<div class="container">
 
-<label>EF (%)</label>
-<input id="ef"><br><br>
+  <h2>Echo Report</h2>
 
-<label>LV Function</label>
-<select id="lv">
-  <option>Normal</option>
-  <option>Moderate Dysfunction</option>
-</select><br><br>
+  <!-- BASIC -->
+  <div class="section">
+    <h3>Basic</h3>
 
-<button onclick="generate()">Generate Report</button>
+    <p><b>EF:</b> <span id="ef"></span>%</p>
+    <p><b>LV Function:</b> <span id="lv"></span></p>
+  </div>
 
-<p id="result"></p>
+  <!-- RWMA -->
+  <div class="section">
+    <h3>RWMA</h3>
+
+    <select id="rwma">
+      <option>None</option>
+      <option>Hypokinesia</option>
+      <option>Akinesia</option>
+    </select>
+  </div>
+
+  <!-- VALVES -->
+  <div class="section">
+    <h3>Mitral Valve</h3>
+
+    <select id="mr">
+      <option>None</option>
+      <option>Mild</option>
+      <option>Moderate</option>
+      <option>Severe</option>
+    </select>
+  </div>
+
+  <!-- RIGHT HEART -->
+  <div class="section">
+    <h3>Right Heart</h3>
+
+    <select id="rv">
+      <option>Normal</option>
+      <option>Dilated</option>
+    </select>
+
+    <input placeholder="PASP (mmHg)" id="pasp">
+  </div>
+
+  <!-- PERICARDIUM -->
+  <div class="section">
+    <h3>Pericardium</h3>
+
+    <select id="pericardium">
+      <option>None</option>
+      <option>Mild Effusion</option>
+      <option>Moderate Effusion</option>
+      <option>Large Effusion</option>
+    </select>
+  </div>
+
+  <button onclick="generate()">Generate Final Impression</button>
+
+  <div class="output" id="output"></div>
+
+  <button onclick="finalize()">Finalize Report</button>
+
+</div>
 
 <script>
-function generate() {
-  let ef = document.getElementById("ef").value;
-  let lv = document.getElementById("lv").value;
+document.getElementById("ef").innerText = localStorage.getItem("ef");
+document.getElementById("lv").innerText = localStorage.getItem("lv");
 
-  if(ef === "") {
-    alert("Enter EF");
-    return;
+function generate() {
+  let text = "";
+
+  let ef = localStorage.getItem("ef");
+  let lv = localStorage.getItem("lv");
+  let rwma = document.getElementById("rwma").value;
+  let mr = document.getElementById("mr").value;
+  let rv = document.getElementById("rv").value;
+  let pasp = document.getElementById("pasp").value;
+  let peri = document.getElementById("pericardium").value;
+
+  text += "EF: " + ef + "%\n";
+  text += "LV Function: " + lv + "\n";
+
+  if (rwma !== "None") {
+    text += "RWMA present: " + rwma + "\n";
   }
 
-  let report = "EF: " + ef + "%, LV Function: " + lv;
+  if (mr !== "None") {
+    text += mr + " Mitral Regurgitation\n";
+  }
 
-  localStorage.setItem("report", report);
+  if (rv !== "Normal") {
+    text += "RV Dilated\n";
+  }
 
+  if (pasp) {
+    text += "PASP: " + pasp + " mmHg\n";
+  }
+
+  if (peri !== "None") {
+    text += peri + "\n";
+  }
+
+  if (text === "") {
+    text = "Normal Echo Study";
+  }
+
+  document.getElementById("output").innerText = text;
+
+  localStorage.setItem("finalReport", text);
+}
+
+function finalize() {
+  alert("Report Finalized");
   window.location.href = "final.html";
 }
 </script>
