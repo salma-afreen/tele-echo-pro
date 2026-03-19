@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Study</title>
+</head>
+
+<body style="font-family: Arial; padding: 40px;">
+
+<h2>Create New Study</h2>
+
+<label>Patient Name</label><br>
+<input id="patient" /><br><br>
+
+<label>Age</label><br>
+<input id="age" /><br><br>
+
+<button onclick="createStudy()">Create Study</button>
+
+<script>
+function createStudy() {
+  let patient = document.getElementById("patient").value;
+  let age = document.getElementById("age").value;
+
+  if (!patient || !age) {
+    alert("Fill all details");
+    return;
+  }
+
+  let studyId = "ST-" + Math.floor(Math.random() * 10000);
+
+  localStorage.setItem("studyId", studyId);
+
+  alert("Study Created: " + studyId);
+
+  window.location.href = "viewer.html";
+}
+</script>
+
+</body>
+</html>
