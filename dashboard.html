@@ -1,88 +1,165 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Tele-Echo Pro Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #f4f6f9;
+    }
+
+    .container {
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: #1f2d3d;
+      color: white;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+    }
+
+    .sidebar button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      background: #34495e;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    /* Main */
+    .main {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .cards {
+      display: flex;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      flex: 1;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+
+    th {
+      background: #f9fafb;
+    }
+
+    .btn {
+      padding: 6px 10px;
+      background: orange;
+      color: white;
+      border-radius: 5px;
+      border: none;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="dashboard">
+<div class="container">
 
-  <!-- SIDEBAR -->
+  <!-- Sidebar -->
   <div class="sidebar">
-    <h2>Tele Echo Pro</h2>
-    <a href="#">Dashboard</a>
-    <a href="#">Patients</a>
-    <a href="#">Studies</a>
-    <a href="#">Reports</a>
-    <a href="#">Settings</a>
+    <h2>Tele-Echo Pro</h2>
+
+    <button onclick="location.href='dashboard.html'">Dashboard</button>
+    <button onclick="location.href='new-study.html'">New Study</button>
+    <button>Patients</button>
+    <button>Reports</button>
+    <button>Settings</button>
   </div>
 
-  <!-- MAIN -->
+  <!-- Main -->
   <div class="main">
 
     <div class="topbar">
-      <h2>Dashboard Overview</h2>
-      <button onclick="newStudy()">+ New Study</button>
+      <h2>Dashboard</h2>
+      <input placeholder="Search..." />
     </div>
 
-    <!-- CARDS -->
+    <!-- Cards -->
     <div class="cards">
-      <div class="card-box">
-        <h3>1240</h3>
-        <p>Total Studies</p>
+      <div class="card">
+        <h3>Total Studies</h3>
+        <h1>1240</h1>
       </div>
 
-      <div class="card-box">
-        <h3>14</h3>
-        <p>Pending Reviews</p>
+      <div class="card">
+        <h3>Pending Reviews</h3>
+        <h1>14</h1>
       </div>
 
-      <div class="card-box">
-        <h3>3</h3>
-        <p>Abnormal Findings</p>
+      <div class="card">
+        <h3>Abnormal</h3>
+        <h1>3</h1>
       </div>
     </div>
 
-    <!-- TABLE -->
-    <div class="table">
-      <h3>Recent Studies</h3>
+    <!-- Table -->
+    <table>
+      <tr>
+        <th>Patient</th>
+        <th>Study ID</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
 
-      <table>
-        <tr>
-          <th>Patient</th>
-          <th>Study ID</th>
-          <th>Date</th>
-          <th>Status</th>
-        </tr>
+      <tr>
+        <td>John Doe</td>
+        <td>ST-1001</td>
+        <td>Today</td>
+        <td>Pending</td>
+        <td><button class="btn">Open</button></td>
+      </tr>
 
-        <tr>
-          <td>Jane Cooper</td>
-          <td>#ECH-3921</td>
-          <td>Oct 24</td>
-          <td>Pending</td>
-        </tr>
-
-        <tr>
-          <td>Cameron</td>
-          <td>#ECH-4512</td>
-          <td>Oct 24</td>
-          <td>In Review</td>
-        </tr>
-
-      </table>
-    </div>
+      <tr>
+        <td>Jane Smith</td>
+        <td>ST-1002</td>
+        <td>Today</td>
+        <td>In Review</td>
+        <td><button class="btn">Open</button></td>
+      </tr>
+    </table>
 
   </div>
-
 </div>
-
-<script>
-function newStudy() {
-  window.location.href = "study.html";
-}
-</script>
 
 </body>
 </html>
