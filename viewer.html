@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Echo Viewer</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #f4f6f9;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* LEFT PANEL (UPLOAD + STUDY INFO) */
+    .left {
+      width: 300px;
+      background: white;
+      padding: 20px;
+      border-right: 1px solid #ddd;
+    }
+
+    .left h3 {
+      margin-top: 0;
+    }
+
+    /* CENTER (IMAGE VIEWER) */
+    .center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
+      color: white;
+    }
+
+    /* RIGHT PANEL (MEASUREMENTS) */
+    .right {
+      width: 300px;
+      background: white;
+      padding: 20px;
+      border-left: 1px solid #ddd;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px;
+      width: 100%;
+      background: #2b7cff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .viewer-box {
+      width: 80%;
+      height: 60%;
+      border: 2px dashed gray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- LEFT -->
+  <div class="left">
+    <h3>Study Info</h3>
+
+    <p><b>Study ID:</b></p>
+    <p id="studyId"></p>
+
+    <h3>Upload DICOM</h3>
+    <input type="file" id="file">
+    <button onclick="upload()">Upload</button>
+
+    <p id="uploadMsg"></p>
+  </div>
+
+  <!-- CENTER -->
+  <div class="center">
+    <div class="viewer-box">
+      Echo Image Preview
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+    <h3>Measurements</h3>
+
+    <label>EF (%)</label>
+    <input id="ef">
+
+    <label>LV Function</label>
+    <select id="lv">
+      <option>Normal</option>
+      <option>Mild Dysfunction</option>
+      <option>Moderate Dysfunction</option>
+      <option>Severe Dysfunction</option>
+    </select>
+
+    <button onclick="save()">Save & Continue</button>
+  </div>
+
+</div>
+
+<script>
+document.getElementById("studyId").innerText =
+  localStorage.getItem("studyId");
+
+function upload() {
+  let file = document.getElementById("file").files[0];
+
+  if (!file) {
+    document.getElementById("uploadMsg").innerText = "Select file";
+    return;
+  }
+
+  if (!file.name.endsWith(".dcm")) {
+    document.getElementById("uploadMsg").innerText = "Only DICOM allowed";
+    return;
+  }
+
+  localStorage.setItem("uploaded", "yes");
+
+  document.getElementById("uploadMsg").innerText = "Upload successful";
+}
+
+function save() {
+  let ef = document.getElementById("ef").value;
+
+  if (!localStorage.getItem("uploaded")) {
+    alert("Upload DICOM first");
+    return;
+  }
+
+  if (!ef) {
+    alert("Enter EF");
+    return;
+  }
+
+  localStorage.setItem("ef", ef);
+  localStorage.setItem("lv", document.getElementById("lv").value);
+
+  window.location.href = "report.html";
+}
+</script>
+
+</body>
+</html>
