@@ -1,27 +1,135 @@
 body {
-  font-family: Arial;
-  background: #f5f7fb;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-.center {
+/* LOGIN PAGE */
+.login-body {
+  background: #f4f7fb;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-.card {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 300px;
+.login-container {
   text-align: center;
 }
 
-button {
+.logo {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: gray;
+  margin-bottom: 20px;
+}
+
+.login-card {
+  background: white;
+  padding: 30px;
+  width: 320px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.login-card label {
+  font-size: 12px;
+  color: #555;
+}
+
+.login-card input,
+.login-card select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 15px 0;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.login-card button {
+  width: 100%;
+  padding: 12px;
   background: #2b7cff;
   color: white;
-  padding: 10px;
   border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#error {
+  color: red;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+/* DASHBOARD */
+
+.dashboard {
+  display: flex;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  background: #0d1b2a;
+  color: white;
+  height: 100vh;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  font-size: 18px;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  padding: 20px;
+  background: #f4f7fb;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+}
+
+.card-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.05);
+}
+
+.table {
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+table {
   width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
 }
