@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Report</title>
+</head>
+
+<body>
+
+<h2>Echo Report</h2>
+
+<label>EF (%)</label>
+<input id="ef"><br><br>
+
+<label>LV Function</label>
+<select id="lv">
+  <option>Normal</option>
+  <option>Moderate Dysfunction</option>
+</select><br><br>
+
+<button onclick="generate()">Generate Report</button>
+
+<p id="result"></p>
+
+<script>
+function generate() {
+  let ef = document.getElementById("ef").value;
+  let lv = document.getElementById("lv").value;
+
+  if(ef === "") {
+    alert("Enter EF");
+    return;
+  }
+
+  let report = "EF: " + ef + "%, LV Function: " + lv;
+
+  localStorage.setItem("report", report);
+
+  window.location.href = "final.html";
+}
+</script>
+
+</body>
+</html>
