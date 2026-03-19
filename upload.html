@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload</title>
+</head>
+
+<body>
+
+<h2>Upload DICOM</h2>
+
+<input type="file" id="file"><br><br>
+
+<button onclick="upload()">Upload</button>
+
+<p id="msg"></p>
+
+<script>
+function upload() {
+  let file = document.getElementById("file").files[0];
+
+  if(!file) {
+    document.getElementById("msg").innerText = "No file selected";
+    return;
+  }
+
+  if(!file.name.endsWith(".dcm")) {
+    document.getElementById("msg").innerText = "Only DICOM allowed!";
+    return;
+  }
+
+  localStorage.setItem("uploaded", "yes");
+
+  document.getElementById("msg").innerText = "Upload complete";
+
+  setTimeout(() => {
+    window.location.href = "report.html";
+  }, 1000);
+}
+</script>
+
+</body>
+</html>
