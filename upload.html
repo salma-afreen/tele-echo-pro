@@ -2,17 +2,53 @@
 <html>
 <head>
   <title>Upload</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f6f9;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 400px;
+      margin: auto;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #2b7cff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #msg {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
 
-<h2>Upload DICOM</h2>
+<div class="box">
 
-<input type="file" id="file"><br><br>
+  <h2>Upload DICOM</h2>
 
-<button onclick="upload()">Upload</button>
+  <input type="file" id="file"><br><br>
 
-<p id="msg"></p>
+  <button onclick="upload()">Upload</button>
+  <button onclick="skip()" style="background: gray; margin-left: 10px;">Skip (Testing)</button>
+
+  <p id="msg"></p>
+
+</div>
 
 <script>
 function upload() {
@@ -33,7 +69,18 @@ function upload() {
   document.getElementById("msg").innerText = "Upload complete";
 
   setTimeout(() => {
-    window.location.href = "report.html";
+    window.location.href = "viewer.html";
+  }, 1000);
+}
+
+// 🚀 TEST MODE (NO DICOM NEEDED)
+function skip() {
+  localStorage.setItem("uploaded", "test");
+
+  document.getElementById("msg").innerText = "Skipping upload (test mode)";
+
+  setTimeout(() => {
+    window.location.href = "viewer.html";
   }, 1000);
 }
 </script>
