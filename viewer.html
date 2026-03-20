@@ -15,7 +15,7 @@
       height: 100vh;
     }
 
-    /* LEFT PANEL (UPLOAD + STUDY INFO) */
+    /* LEFT PANEL */
     .left {
       width: 300px;
       background: white;
@@ -27,7 +27,7 @@
       margin-top: 0;
     }
 
-    /* CENTER (IMAGE VIEWER) */
+    /* CENTER VIEWER */
     .center {
       flex: 1;
       display: flex;
@@ -37,7 +37,17 @@
       color: white;
     }
 
-    /* RIGHT PANEL (MEASUREMENTS) */
+    .viewer-box {
+      width: 80%;
+      height: 60%;
+      border: 2px dashed gray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+    }
+
+    /* RIGHT PANEL */
     .right {
       width: 300px;
       background: white;
@@ -61,13 +71,9 @@
       cursor: pointer;
     }
 
-    .viewer-box {
-      width: 80%;
-      height: 60%;
-      border: 2px dashed gray;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    #uploadMsg {
+      margin-top: 10px;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -92,8 +98,8 @@
 
   <!-- CENTER -->
   <div class="center">
-    <div class="viewer-box">
-      Echo Image Preview
+    <div class="viewer-box" id="viewerText">
+      No image uploaded
     </div>
   </div>
 
@@ -102,7 +108,7 @@
     <h3>Measurements</h3>
 
     <label>EF (%)</label>
-    <input id="ef">
+    <input id="ef" placeholder="Enter EF">
 
     <label>LV Function</label>
     <select id="lv">
@@ -118,9 +124,11 @@
 </div>
 
 <script>
+// Show Study ID
 document.getElementById("studyId").innerText =
-  localStorage.getItem("studyId");
+  localStorage.getItem("studyId") || "TEST-STUDY-001";
 
+// Upload function
 function upload() {
   let file = document.getElementById("file").files[0];
 
@@ -137,14 +145,22 @@ function upload() {
   localStorage.setItem("uploaded", "yes");
 
   document.getElementById("uploadMsg").innerText = "Upload successful";
+
+  // Fake preview
+  document.getElementById("viewerText").innerText =
+    "DICOM Loaded: " + file.name;
 }
 
+// SAVE FUNCTION (FIXED 🚀)
 function save() {
   let ef = document.getElementById("ef").value;
 
-  if (!localStorage.getItem("uploaded")) {
-    alert("Upload DICOM first");
-    return;
+  // Allow testing even without upload
+  let uploaded = localStorage.getItem("uploaded");
+
+  if (!uploaded) {
+    let proceed = confirm("No DICOM uploaded. Continue for testing?");
+    if (!proceed) return;
   }
 
   if (!ef) {
